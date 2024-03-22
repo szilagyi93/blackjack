@@ -1,6 +1,6 @@
 import random
 class Card:
-    def __init__(self, suite, value):
+    def __init__(self, suite='c', value='2'):
         self.suite = suite
         self.value = value
         self.color = self.get_color()
@@ -51,7 +51,6 @@ class Deck:
         else:
             raise ValueError
         
-
 class BlackJack(): 
     def __init__(self,number_of_players=None, deck=None):
         deckIsNone = deck is None
@@ -95,15 +94,55 @@ class BlackJack():
         self.dealer_cards
 
     def deal_to_player(self,player_number):
-        self.player_cards[player_number][i] = self.deck.cards[0]
+        self.player_cards[player_number].append(self.deck.cards[0])
         self.deck.cards.pop(0)
+
+class Player():
+    def __init__(self,id=int,money=0):
+        self.id = id
+        self.money = money
+        self.cards = [Card]
+        self.score = int(0)
+        self.count_cards = bool
+        self.count_cards_value = int
+    
+    def get_carad(self, card):
+        if isinstance(card,Card):
+            self.cards.append(card)
+        else: 
+            raise ValueError("Plese use Card object!")
+    
+    def calculate_score(self):
+        for card in self.cards:
+            self.score = self.score + card.value
+
+class Dealer():
+    def __init__(self):
+        self.cards = [Card]
+        self.score = int(0)
+        
+    def initial_deal(self):
+        None
+        
+    def deal_card_to_player(self):
+        None
+
+    def get_carad(self, card):
+        if isinstance(card,Card):
+            self.cards.append(card)
+        else: 
+            raise ValueError("Plese use Card object!")
+
+    def calculate_score(self):
+        for card in self.cards:
+            self.score = self.score + card.value
         
         
 
      
 if __name__ == '__main__':
-    Card()
-    Deck()
-    BlackJack()
-    game = BlackJack(number_of_players=5)
-    game.deal()
+    card = Card()
+    deck = Deck()
+    player = Player()
+    dealer = Dealer()
+    balckjack = BlackJack()

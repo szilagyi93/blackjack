@@ -37,13 +37,13 @@ class TestDeckInitialization(unittest.TestCase):
     
     def test_shuffled_list_init(self):
         #Preparation of shuffled deck
-
         custom_carads = [Card(suite, value) for suite in ['s', 'd', 'c', 'h'] for value in [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']]
         random.shuffle(custom_carads)
         print(custom_carads)
-
+        
         #Intance with shuffled deck
         deck = Deck(custom_carads)
+        #Test
         self.assertEqual(deck.cards, custom_carads, "The initial deck is not " + str(custom_carads))
     
 class TestDeckMethods(unittest.TestCase):
@@ -73,6 +73,7 @@ class TestDeckMethods(unittest.TestCase):
 class testBlackJack(unittest.TestCase):
     def test_empty_init(self):
         game = BlackJack()
+        
         
         
         
@@ -108,6 +109,13 @@ class testBlackJack(unittest.TestCase):
             +'are not same!'
         )
         self.assertEqual(game_shuffled_deck.deck.cards,deck_1.cards, asset_msg)
+        
+    def test_black_jack_deal_to_player(self):
+        game =  BlackJack(number_of_players=3,deck=Deck())
+        game.inital_deal()
+        for player_number in range(1,game.number_of_players+1,1):
+            game.deal_to_player(player_number)
+            print(str(game.player_cards[player_number][:-1]))
         
         
 if __name__ == '__main__':
